@@ -3,10 +3,10 @@
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect } from "next/navigation";
-import { Signup } from "@/app/components/login";
+import Signup from "@/app/components/signup";
 import type { Database } from "@/lib/database.types";
 
-export const SignupPage = async () => {
+const SignupPage = async () => {
   const supabase = createServerComponentClient<Database>({
     cookies,
   });
@@ -23,3 +23,5 @@ export const SignupPage = async () => {
 
   return <Signup />;
 };
+
+export default SignupPage;
