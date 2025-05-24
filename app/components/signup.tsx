@@ -19,7 +19,7 @@ const schema = z.object({
 });
 
 // サインアップページ
-export const Signup = () => {
+const Signup = () => {
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
   const [loading, setLoading] = useState(false);
@@ -30,6 +30,7 @@ export const Signup = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     // 初期値
     defaultValues: { name: "", email: "", password: "" },
@@ -42,17 +43,38 @@ export const Signup = () => {
     setLoading(true);
 
     try {
-      // ログイン
-      const { error } = await supabase.auth.signInWithPassword({
+      // サインアップ
+      const { error: errorSignUp } = await supabase.auth.signUp({
         email: data.email,
         password: data.password,
+        options: {
+          emailRedirectTo: `${location.origin}/auth/callback`,
+        },
       });
 
       //  エラーチェック
-      if (error) {
-        setMessage("エラーが発生しました" + error.message);
+      if (errorSignUp) {
+        setMessage("エラーが発生しました" + errorSignUp.message);
         return;
       }
+
+      // プロフィールの名前の更新
+      const { error: updateError } = await supabase
+        .from(`profiles`)
+        .update({ name: data.name })
+        .eq("email", data.email);
+
+      // エラーチェック
+      if (updateError) {
+        setMessage("エラーが発生しました。" + updateError.message);
+        return;
+      }
+
+      // 入力フォームクリア
+      reset();
+      setMessage(
+        "本登録用のURLを記載したメールを送信しました。メールをご確認の上、メール本文中のURLをクリックして、本登録を行ってください。"
+      );
     } catch (error) {
       setMessage("エラーが発生しました");
       return;
@@ -86,7 +108,7 @@ export const Signup = () => {
             className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500"
             placeholder="メールアドレス"
             id="email"
-            {...register("name", { required: true })}
+            {...register("email", { required: true })}
           />
           <div className="my-3 text-center text-sm text-red-500">
             {errors.email?.message}
@@ -96,11 +118,11 @@ export const Signup = () => {
         {/* パスワード */}
         <div className="mb-3">
           <input
-            type="text"
+            type="password"
             className="border rounded-md w-full py-2 px-3 focus:outline-none focus:border-sky-500"
             placeholder="パスワード"
             id="password"
-            {...register("name", { required: true })}
+            {...register("password", { required: true })}
           />
           <div className="my-3 text-center text-sm text-red-500">
             {errors.password?.message}
@@ -135,3 +157,5 @@ export const Signup = () => {
     </div>
   );
 };
+
+export default Signup;

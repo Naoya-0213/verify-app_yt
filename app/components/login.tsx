@@ -19,7 +19,7 @@ const schema = z.object({
 });
 
 // ログインページ
-export const Login = () => {
+const Login = () => {
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
   const [loading, setLoading] = useState(false);
@@ -102,8 +102,10 @@ export const Login = () => {
           ) : (
             <button
               type="submit"
-              className="font-bold bg-sky-500 hover:brightness-95 w-full rounded-full p-2"
-            ></button>
+              className="font-bold bg-sky-500 hover:brightness-95 w-full rounded-full p-2 text-white"
+            >
+              ログイン
+            </button>
           )}
         </div>
       </form>
@@ -129,3 +131,5 @@ export const Login = () => {
     </div>
   );
 };
+
+export default Login;
