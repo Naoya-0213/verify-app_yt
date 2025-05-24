@@ -124,7 +124,7 @@ const Login = () => {
 
       {/* サインアップ用のリンク */}
       <div className="text-center text-sm mb-5">
-        <Link href="/auth/singup" className="text-gray-500 font-bold">
+        <Link href="/auth/signup" className="text-gray-500 font-bold">
           アカウントを作成する
         </Link>
       </div>
