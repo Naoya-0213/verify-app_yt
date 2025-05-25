@@ -137,7 +137,7 @@ const Signup = () => {
           ) : (
             <button
               type="submit"
-              className="font-bold bg-sky-500 hover:brightness-95 w-full rounded-full p-2"
+              className="font-bold bg-sky-500 hover:brightness-95 w-full rounded-full p-2 text-white"
             >
               サインアップ
             </button>
