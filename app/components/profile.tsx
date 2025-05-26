@@ -11,7 +11,7 @@ import Loading from "@/app/loading";
 import * as z from "zod";
 import type { Database } from "@/lib/database.types";
 import useStore from "@/store";
-import Profile from "@/app/components/profile";
+// import Profile from "@/app/components/profile";
 import { resolve } from "path";
 import { fi } from "zod/v4/locales";
 type Schema = z.infer<typeof schema>;
