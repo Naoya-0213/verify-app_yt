@@ -47,7 +47,7 @@ const Profile = () => {
     resolver: zodResolver(schema),
   });
 
-  //   アバター画像の取得
+  //   アバター画像URLの取得
   useEffect(() => {
     if (user && user.avatar_url) {
       setAvatarUrl(user.avatar_url);
