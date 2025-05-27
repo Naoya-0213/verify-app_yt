@@ -199,6 +199,7 @@ const Profile = () => {
                 id="introduce"
                 {...register("introduce")}
                 rows={5}
+                // テキストエリアを5行分の高さで表示する
               />
             </div>
 
