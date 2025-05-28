@@ -6,6 +6,7 @@ import type { Session } from "@supabase/auth-helpers-nextjs";
 import Image from "next/image";
 import { useEffect } from "react";
 import type { Database } from "@/lib/database.types";
+
 type ProfileType = Database["public"]["Tables"]["profiles"]["Row"];
 
 // ナビゲーション
@@ -41,7 +42,18 @@ export const Navigation = ({
           {session ? (
             <div className="flex items-center space-x-5">
               <Link href="/settings/profile">
-                <div>プロフィール</div>
+                <div className="relative w-10 h-10">
+                  <Image
+                    src={
+                      profile && profile.avatar_url
+                        ? profile.avatar_url
+                        : "/default.png"
+                    }
+                    className="rounded-full object-cover"
+                    alt="avatar"
+                    fill
+                  />
+                </div>
               </Link>
             </div>
           ) : (
