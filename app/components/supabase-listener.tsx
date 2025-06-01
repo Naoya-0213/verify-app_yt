@@ -15,7 +15,6 @@ export const SupabaseListener = async () => {
   } = await supabase.auth.getSession();
 
   // プロフィールの取得
-  
   let profile = null;
   if (session) {
     const { data: currentProfile } = await supabase
