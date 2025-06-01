@@ -51,7 +51,7 @@ const Login = () => {
 
       //  エラーチェック
       if (error) {
-        setMessage("エラーが発生しました" + error.message);
+        setMessage(`ログインに失敗しました：${error.message}`);
         return;
       }
     } catch (error) {
